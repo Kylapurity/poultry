@@ -33,11 +33,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     'activity': {'min': "Low Activity", 'max': "High Activity"},
   };
 
-  // Flag for showing notifications
   bool showNotification = false;
   String notificationMessage = '';
-
-  // Selected time period for graph
   String selectedTimePeriod = '1D';
 
   Map<String, double> _getChartBoundaries() {
@@ -87,36 +84,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
       alertMessage = 'Egg Production is Low ($activity).';
     }
 
-    // Check Temperature
     final temp = _latestReading!.temperature;
     final tempThreshold = thresholds['temperature']!;
     if (temp > tempThreshold['max']!) {
-      alertMessage = 'Temperature is too high ($temp°C). Adjust ventilation.';
+      alertMessage = 'Temperature is too high (${temp.toStringAsFixed(1)}°C). Adjust ventilation.';
     } else if (temp < tempThreshold['min']!) {
-      alertMessage = 'Temperature is too low ($temp°C). Add heating.';
+      alertMessage = 'Temperature is too low (${temp.toStringAsFixed(1)}°C). Add heating.';
     }
 
-    // Check Humidity
     final humidity = _latestReading!.humidity;
     final humidityThreshold = thresholds['humidity']!;
     if (humidity > humidityThreshold['max']!) {
-      alertMessage = 'Humidity is too high ($humidity%). Improve ventilation.';
+      alertMessage = 'Humidity is too high (${humidity.toStringAsFixed(1)}%). Improve ventilation.';
     } else if (humidity < humidityThreshold['min']!) {
-      alertMessage = 'Humidity is too low ($humidity%). Add moisture.';
+      alertMessage = 'Humidity is too low (${humidity.toStringAsFixed(1)}%). Add moisture.';
     }
 
-    // Check Ammonia
     final ammonia = _latestReading!.ammonia;
     final ammoniaThreshold = thresholds['ammonia']!;
     if (ammonia > ammoniaThreshold['max']!) {
-      alertMessage = 'Ammonia level is too high ($ammonia ppm). Clean coop!';
+      alertMessage = 'Ammonia level is too high (${ammonia.toStringAsFixed(1)} ppm). Clean coop!';
     }
 
-    // Check Light Intensity
     final light = _latestReading!.lightIntensity;
     final lightThreshold = thresholds['light_intensity']!;
     if (light < lightThreshold['min']!) {
-      alertMessage = 'Light intensity is too low ($light lux). Chickens need 14-16 hours of light.';
+      alertMessage = 'Light intensity is too low (${light.toStringAsFixed(1)} lux). Chickens need 14-16 hours of light.';
     }
 
     if (alertMessage != null) {
@@ -176,7 +169,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // White background as requested
+      backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -193,7 +186,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Notification Banner
                           if (showNotification)
                             Container(
                               width: double.infinity,
@@ -228,16 +220,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                             ),
 
-                          // App Logo (use your image here)
                           Center(
                             child: Image.asset(
-                              'lib/assets/images/Background.png', // Replace with your chicken/egg logo
+                              'lib/assets/images/Background.png',
                               width: 100,
                             ),
                           ),
                           const SizedBox(height: 16),
 
-                          // Dashboard Title
                           const Text(
                             'Dashboard',
                             style: TextStyle(
@@ -249,7 +239,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 2),
 
-                          // Subtitle
                           const Text(
                             'Total Production and Metrics',
                             style: TextStyle(
@@ -260,12 +249,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 20),
 
-                          // Production Activity Section
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
                               color: const Color(0xFF5E4935),
                               borderRadius: BorderRadius.circular(20),
@@ -282,17 +267,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 16),
 
-                          // Activity Card
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: Colors.grey.shade300,
-                                width: 1,
-                              ),
+                              border: Border.all(color: Colors.grey.shade300, width: 1),
                             ),
                             child: Row(
                               children: [
@@ -303,11 +284,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     color: Colors.grey.shade200,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Icon(
-                                    Icons.egg_outlined,
-                                    size: 30,
-                                    color: Colors.black,
-                                  ),
+                                  child: const Icon(Icons.egg_outlined, size: 30, color: Colors.black),
                                 ),
                                 const SizedBox(width: 16),
                                 Column(
@@ -324,9 +301,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      _isLoading
-                                          ? 'Loading...'
-                                          : (_latestReading?.activity ?? 'High Activity'),
+                                      _isLoading ? 'Loading...' : (_latestReading?.activity ?? 'High Activity'),
                                       style: const TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontSize: 24,
@@ -341,12 +316,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 20),
 
-                          // Environmental Conditions Section
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
                               color: const Color(0xFFE78B41),
                               borderRadius: BorderRadius.circular(20),
@@ -363,19 +334,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 16),
 
-                          // Temperature and Humidity row
                           Row(
                             children: [
                               Expanded(
                                 child: _buildSimpleCard(
                                   icon: Icons.thermostat,
                                   label: 'TEMPERATURE',
-                                  value: _isLoading
-                                      ? '--'
-                                      : (_latestReading?.temperature.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading ? '--' : (_latestReading?.temperature.toStringAsFixed(1) ?? '0'),
                                   unit: '°C',
-                                  valueColor: _latestReading != null &&
-                                          _latestReading!.temperature > thresholds['temperature']!['max']!
+                                  valueColor: _latestReading != null && _latestReading!.temperature > thresholds['temperature']!['max']!
                                       ? Colors.red
                                       : const Color(0xFF4CAF50),
                                 ),
@@ -385,12 +352,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: _buildSimpleCard(
                                   icon: Icons.water_drop,
                                   label: 'HUMIDITY',
-                                  value: _isLoading
-                                      ? '--'
-                                      : (_latestReading?.humidity.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading ? '--' : (_latestReading?.humidity.toStringAsFixed(1) ?? '0'),
                                   unit: '%',
-                                  valueColor: _latestReading != null &&
-                                          _latestReading!.humidity > thresholds['humidity']!['max']!
+                                  valueColor: _latestReading != null && _latestReading!.humidity > thresholds['humidity']!['max']!
                                       ? Colors.red
                                       : const Color(0xFF4CAF50),
                                 ),
@@ -399,19 +363,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 12),
 
-                          // Ammonia and Light Intensity row
                           Row(
                             children: [
                               Expanded(
                                 child: _buildSimpleCard(
                                   icon: Icons.cloud,
                                   label: 'AMMONIA/CO₂',
-                                  value: _isLoading
-                                      ? '--'
-                                      : (_latestReading?.ammonia.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading ? '--' : (_latestReading?.ammonia.toStringAsFixed(1) ?? '0'),
                                   unit: 'ppm',
-                                  valueColor: _latestReading != null &&
-                                          _latestReading!.ammonia > thresholds['ammonia']!['max']!
+                                  valueColor: _latestReading != null && _latestReading!.ammonia > thresholds['ammonia']!['max']!
                                       ? Colors.red
                                       : const Color(0xFF4CAF50),
                                 ),
@@ -421,9 +381,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: _buildSimpleCard(
                                   icon: Icons.wb_sunny,
                                   label: 'LIGHT INTENSITY',
-                                  value: _isLoading
-                                      ? '--'
-                                      : (_latestReading?.lightIntensity.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading ? '--' : (_latestReading?.lightIntensity.toStringAsFixed(1) ?? '0'),
                                   unit: 'lux',
                                   valueColor: const Color(0xFF4CAF50),
                                 ),
@@ -432,12 +390,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 20),
 
-                          // Graphs Section
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
                               color: const Color(0xFFE78B41),
                               borderRadius: BorderRadius.circular(20),
@@ -454,17 +408,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 16),
 
-                          // Graph card
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: Colors.grey.shade300,
-                                width: 1,
-                              ),
+                              border: Border.all(color: Colors.grey.shade300, width: 1),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -492,31 +442,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             GestureDetector(
                                               onTap: () async {
                                                 setState(() => selectedTimePeriod = period);
-                                                final historicalData =
-                                                    await _apiService.getHistoricalData(period);
-                                                setState(
-                                                  () => _chartData = _prepareChartData(historicalData),
-                                                );
+                                                final historicalData = await _apiService.getHistoricalData(period);
+                                                setState(() => _chartData = _prepareChartData(historicalData));
                                               },
                                               child: Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 5,
-                                                ),
+                                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                                 decoration: BoxDecoration(
-                                                  color: selectedTimePeriod == period
-                                                      ? Colors.white
-                                                      : Colors.transparent,
+                                                  color: selectedTimePeriod == period ? Colors.white : Colors.transparent,
                                                   borderRadius: BorderRadius.circular(20),
                                                   boxShadow: selectedTimePeriod == period
-                                                      ? [
-                                                        BoxShadow(
-                                                          color: Colors.grey.withOpacity(0.2),
-                                                          spreadRadius: 1,
-                                                          blurRadius: 2,
-                                                          offset: const Offset(0, 1),
-                                                        ),
-                                                      ]
+                                                      ? [BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 1, blurRadius: 2, offset: const Offset(0, 1))]
                                                       : null,
                                                 ),
                                                 child: Text(
@@ -524,9 +459,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   style: TextStyle(
                                                     fontFamily: 'Montserrat',
                                                     fontSize: 12,
-                                                    fontWeight: selectedTimePeriod == period
-                                                        ? FontWeight.bold
-                                                        : FontWeight.normal,
+                                                    fontWeight: selectedTimePeriod == period ? FontWeight.bold : FontWeight.normal,
                                                     color: const Color(0xFF3A3A3A),
                                                   ),
                                                 ),
@@ -539,7 +472,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const SizedBox(height: 16),
 
-                                // Line chart
                                 SizedBox(
                                   height: 160,
                                   child: _chartData.isEmpty
@@ -552,23 +484,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               lineBarsData: _chartData.asMap().entries.map((entry) {
                                                 int index = entry.key;
                                                 List<FlSpot> spots = entry.value;
-                                                Color color;
-                                                switch (index) {
-                                                  case 0:
-                                                    color = Colors.red;
-                                                    break;
-                                                  case 1:
-                                                    color = Colors.blue;
-                                                    break;
-                                                  default:
-                                                    color = Colors.orange;
-                                                }
-                                                return LineChartBarData(
-                                                  spots: spots,
-                                                  color: color,
-                                                  isCurved: true,
-                                                  dotData: FlDotData(show: true),
-                                                );
+                                                Color color = index == 0 ? Colors.red : (index == 1 ? Colors.blue : Colors.orange);
+                                                return LineChartBarData(spots: spots, color: color, isCurved: true, dotData: FlDotData(show: true));
                                               }).toList(),
                                               lineTouchData: LineTouchData(
                                                 touchTooltipData: LineTouchTooltipData(
@@ -577,32 +494,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                     return touchedSpots.map((spot) {
                                                       String tooltipText = '';
                                                       Color textColor;
-                                                      switch (spot.barIndex) {
-                                                        case 0:
-                                                          tooltipText = 'Temp: ${spot.y.toStringAsFixed(1)}°C';
-                                                          textColor = Colors.red;
-                                                          break;
-                                                        case 1:
-                                                          tooltipText = 'Humidity: ${spot.y.toStringAsFixed(1)}%';
-                                                          textColor = Colors.blue;
-                                                          break;
-                                                        case 2:
-                                                          tooltipText = 'Ammonia: ${spot.y.toStringAsFixed(1)} ppm';
-                                                          textColor = Colors.orange;
-                                                          break;
-                                                        default:
-                                                          tooltipText = 'Value: ${spot.y.toStringAsFixed(1)}';
-                                                          textColor = Colors.black;
+                                                      if (spot.barIndex == 0) {
+                                                        tooltipText = 'Temp: ${spot.y.toStringAsFixed(1)}°C';
+                                                        textColor = Colors.red;
+                                                      } else if (spot.barIndex == 1) {
+                                                        tooltipText = 'Humidity: ${spot.y.toStringAsFixed(1)}%';
+                                                        textColor = Colors.blue;
+                                                      } else {
+                                                        tooltipText = 'Ammonia: ${spot.y.toStringAsFixed(1)} ppm';
+                                                        textColor = Colors.orange;
                                                       }
-                                                      return LineTooltipItem(
-                                                        tooltipText,
-                                                        TextStyle(
-                                                          fontFamily: 'Montserrat',
-                                                          color: textColor,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: 12,
-                                                        ),
-                                                      );
+                                                      return LineTooltipItem(tooltipText, TextStyle(fontFamily: 'Montserrat', color: textColor, fontWeight: FontWeight.bold, fontSize: 12));
                                                     }).toList();
                                                   },
                                                 ),
@@ -610,62 +512,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               ),
                                               gridData: FlGridData(
                                                 drawHorizontalLine: true,
-                                                horizontalInterval:
-                                                    (boundaries['maxY']! - boundaries['minY']!) / 4,
-                                                getDrawingHorizontalLine: (value) {
-                                                  return FlLine(
-                                                    color: Colors.grey.shade200,
-                                                    strokeWidth: 1,
-                                                    dashArray: [5, 5],
-                                                  );
-                                                },
+                                                horizontalInterval: (boundaries['maxY']! - boundaries['minY']!) / 4,
+                                                getDrawingHorizontalLine: (value) => FlLine(color: Colors.grey.shade200, strokeWidth: 1, dashArray: [5, 5]),
                                                 drawVerticalLine: false,
                                               ),
                                               titlesData: FlTitlesData(
                                                 bottomTitles: AxisTitles(
                                                   sideTitles: SideTitles(
                                                     showTitles: true,
-                                                    getTitlesWidget: (value, meta) {
-                                                      return Padding(
-                                                        padding: const EdgeInsets.only(top: 8.0),
-                                                        child: Text(
-                                                          value.toInt().toString(),
-                                                          style: TextStyle(
-                                                            fontFamily: 'Montserrat',
-                                                            color: Colors.grey.shade500,
-                                                            fontSize: 10,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
+                                                    getTitlesWidget: (value, meta) => Padding(
+                                                      padding: const EdgeInsets.only(top: 8.0),
+                                                      child: Text(value.toInt().toString(), style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey.shade500, fontSize: 10)),
+                                                    ),
                                                     reservedSize: 22,
                                                   ),
                                                 ),
                                                 leftTitles: AxisTitles(
                                                   sideTitles: SideTitles(
                                                     showTitles: true,
-                                                    getTitlesWidget: (value, meta) {
-                                                      return Padding(
-                                                        padding: const EdgeInsets.only(right: 8.0),
-                                                        child: Text(
-                                                          value.toStringAsFixed(0),
-                                                          style: TextStyle(
-                                                            fontFamily: 'Montserrat',
-                                                            color: Colors.grey.shade500,
-                                                            fontSize: 10,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
+                                                    getTitlesWidget: (value, meta) => Padding(
+                                                      padding: const EdgeInsets.only(right: 8.0),
+                                                      child: Text(value.toStringAsFixed(0), style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey.shade500, fontSize: 10)),
+                                                    ),
                                                     reservedSize: 22,
                                                   ),
                                                 ),
-                                                topTitles: const AxisTitles(
-                                                  sideTitles: SideTitles(showTitles: false),
-                                                ),
-                                                rightTitles: const AxisTitles(
-                                                  sideTitles: SideTitles(showTitles: false),
-                                                ),
+                                                topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                                                rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                                               ),
                                               borderData: FlBorderData(show: false),
                                               minX: boundaries['minX']!,
@@ -679,7 +552,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const SizedBox(height: 16),
 
-                                // Legend
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -700,7 +572,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ),
                 ),
-                // Bottom Navigation
                 BottomNavigationBar(
                   currentIndex: 0,
                   backgroundColor: Colors.white,
@@ -711,49 +582,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   type: BottomNavigationBarType.fixed,
                   elevation: 8,
                   items: const [
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.dashboard),
-                      label: 'Dashboard',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.mic),
-                      label: 'Audio',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.history),
-                      label: 'History',
-                    ),
+                    BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
+                    BottomNavigationBarItem(icon: Icon(Icons.mic), label: 'Audio'),
+                    BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
                   ],
                   onTap: (index) {
                     if (index == 0) return;
-
                     if (index == 1) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const AudioScreen()),
-                      );
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AudioScreen()));
                     } else if (index == 2) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HistoryScreen()),
-                      );
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HistoryScreen()));
                     }
                   },
                 ),
               ],
             ),
 
-            // Chatbot button
             Positioned(
               right: 22,
               bottom: 80,
               child: FloatingActionButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ChatbotScreen()),
-                  );
-                },
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatbotScreen())),
                 backgroundColor: const Color(0xFFE78B41),
                 child: const Icon(Icons.chat_bubble_outline, color: Colors.white),
               ),
@@ -764,26 +613,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildSimpleCard({
-    required IconData icon,
-    required String label,
-    required String value,
-    String unit = '',
-    Color valueColor = const Color(0xFF4CAF50),
-  }) {
+  Widget _buildSimpleCard({required IconData icon, required String label, required String value, String unit = '', Color valueColor = const Color(0xFF4CAF50)}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.shade300, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.05),
-            blurRadius: 2,
-            offset: const Offset(0, 1),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.05), blurRadius: 2, offset: const Offset(0, 1))],
       ),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -792,10 +629,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Container(
               width: 50,
               height: 50,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(8),
-              ),
+              decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
               child: Icon(icon, size: 24, color: Colors.black),
             ),
             const SizedBox(width: 10),
@@ -803,44 +637,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    label,
-                    style: const TextStyle(
-                      fontFamily: 'Lexend',
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF3A3A3A),
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  Text(label, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 8, fontWeight: FontWeight.bold, color: Color(0xFF3A3A3A)), maxLines: 1, overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 1),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text(
-                        value,
-                        style: TextStyle(
-                          fontFamily: 'Lexend',
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: valueColor,
-                        ),
-                      ),
-                      if (unit.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 2.0),
-                          child: Text(
-                            unit,
-                            style: TextStyle(
-                              fontFamily: 'Urbanist',
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                        ),
+                      Text(value, style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, fontWeight: FontWeight.bold, color: valueColor)),
+                      if (unit.isNotEmpty) Padding(padding: const EdgeInsets.only(left: 2.0), child: Text(unit, style: TextStyle(fontFamily: 'Montserrat', fontSize: 10, fontWeight: FontWeight.w500, color: Colors.grey.shade600))),
                     ],
                   ),
                 ],
@@ -854,34 +658,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildLegendItem(String label, Color color) {
     return Row(
-      children: [Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        ),
+      children: [
+        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 6),
-        Text(
-          label,
-          style: const TextStyle(
-            fontFamily: 'Urbanist',
-            fontSize: 12,
-            color: Color(0xFF3A3A3A),
-          ),
-        ),
+        Text(label, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 12, color: Color(0xFF3A3A3A))),
       ],
     );
   }
 }
 
-// Note: You need to add AudioScreen to your imports
 class AudioScreen extends StatelessWidget {
   const AudioScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Audio')),
-      body: const Center(child: Text('Audio Screen')),
-    );
+    return Scaffold(appBar: AppBar(title: const Text('Audio')), body: const Center(child: Text('Audio Screen')));
   }
 }
