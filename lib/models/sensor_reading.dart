@@ -25,7 +25,7 @@ class SensorReading {
   factory SensorReading.fromMap(Map<String, dynamic> map) {
 
     return SensorReading(
-      activity: map['soil_activity'] ?? 'Unknown',
+      activity: map['soil_activity']?.toString() ?? 'Unknown',
       temperature: map['temperature']?.toDouble() ?? 0.0,
       humidity: map['humidity']?.toDouble() ?? 0.0,
       moisture: map['moisture']?.toDouble() ?? 0.0,

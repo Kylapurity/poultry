@@ -66,12 +66,12 @@ class _SplashScreenState extends State<SplashScreen> {
                     children: [
                       // Logo with hexagon and circuit lines
                       Image.asset(
-                        'lib/assets/images/fauna_pulse_logo.png',
+                        'lib/assets/images/poultry_app_logo.png',
                         width: 150,
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        'FAUNA PULSE',
+                        'PoultryApp',
                         style: TextStyle(
                           fontFamily: 'Lexend',
                           fontSize: 28,

@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Logo
                       Center(
                         child: Image.asset(
-                          'lib/assets/images/fauna_pulse_logo.png',
+                          'lib/assets/images/poultry_app_logo.png',
                           width: 100,
                         ),
                       ),

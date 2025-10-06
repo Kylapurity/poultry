@@ -312,7 +312,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'FaunaPulse',
+                                      'PoultryApp',
                                       style: TextStyle(
                                         fontFamily: 'Lexend',
                                         fontSize: 18,
@@ -336,7 +336,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             // App Logo
                             Center(
                               child: Image.asset(
-                                'lib/assets/images/fauna_pulse_logo.png',
+                                'lib/assets/images/poultry_app_logo.png',
                                 width: 100,
                               ),
                             ),
@@ -552,7 +552,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: const Text(
-                                'Poultrys and Conductivity',
+                                'Poultrys and Productivity',
                                 style: TextStyle(
                                   fontFamily: 'Urbanist',
                                   fontSize: 12,
