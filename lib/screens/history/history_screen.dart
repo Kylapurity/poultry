@@ -18,26 +18,27 @@ class _HistoryScreenState extends State<HistoryScreen> {
   bool isPastReadingsExpanded = true;
 
   // Sample data
-  // final List<String> notifications = [
-  //   'Temperature was abnormally high',
-  //   'Moisture levels dropped below threshold',
-  //   'Soil activity increased significantly',
-  // ];
+  final List<String> notifications = [
+    'Temperature was abnormally high',
+    'Light Intesity levels dropped below threshold',
+    'CO2 has increased significantly',
+  ];
 
-  // final List<String> previousChats = [
-  //   'What is agriculture?',
-  //   'How to improve soil health?',
-  //   'What plants grow best in alkaline soil?',
-  // ];
+  final List<String> previousChats = [
+    'What is agriculture?',
+    'How to improve soil health?',
+    'What plants grow best in alkaline soil?',
+  ];
 
-  // final List<Map<String, dynamic>> pastReadings = [
-  //   {'temperature': 34, 'humidity': 98, 'timestamp': '2023-05-15 14:30'},
-  //   {'temperature': 32, 'humidity': 95, 'timestamp': '2023-05-15 10:15'},
-  //   {'temperature': 28, 'humidity': 92, 'timestamp': '2023-05-14 16:45'},
-  //   {'temperature': 26, 'humidity': 90, 'timestamp': '2023-05-14 12:30'},
-  //   {'temperature': 23, 'humidity': 99, 'timestamp': '2023-05-13 18:20'},
-  //   {'temperature': 22, 'humidity': 98, 'timestamp': '2023-05-13 14:10'},
-  // ];
+  final List<Map<String, dynamic>> pastReadings = [
+    {'temperature': 34, 'humidity': 98, 'timestamp': '2023-05-15 14:30'},
+    {'temperature': 32, 'humidity': 95, 'timestamp': '2023-05-15 10:15'},
+    {'temperature': 28, 'humidity': 92, 'timestamp': '2023-05-14 16:45'},
+    {'temperature': 26, 'humidity': 90, 'timestamp': '2023-05-14 12:30'},
+    {'temperature': 23, 'humidity': 99, 'timestamp': '2023-05-13 18:20'},
+    {'temperature': 22, 'humidity': 98, 'timestamp': '2023-05-13 14:10'},
+  ];
+
   List<Map<String, dynamic>> notifications = [];
   List<Map<String, dynamic>> previousChats = [];
   List<Map<String, dynamic>> pastReadings = [];

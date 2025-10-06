@@ -1,6 +1,6 @@
 # 🌱 Poultry App
 
-**Poultry App** is a smart agriculture mobile application built with Flutter. It monitors **soil parameters** (e.g., moisture, temperature, vibration) and uses machine learning models to **predict anomalies** and **alert farmers** when environmental conditions become unfavorable for crops.
+**Poultry App** is a smart agriculture mobile application built with Flutter. It monitors **Total-Egg-Production** (e.g., moisture, temperature, vibration) and uses machine learning models to **predict anomalies** and **alert farmers** when environmental conditions become unfavorable for crops.
 
 This app is part of a precision farming ecosystem, aiming to **increase yield, prevent soil degradation**, and **empower farmers with timely, data-driven insights**.
 

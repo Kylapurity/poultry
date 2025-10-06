@@ -63,7 +63,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/soil_background.jpg'),
+            image: AssetImage('lib/assets/images/Background.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(Colors.white30, BlendMode.lighten),
           ),

@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           // Background
           Image.asset(
-            'lib/assets/images/soil_background.jpg',
+            'lib/assets/images/Background.png',
             fit: BoxFit.cover,
             color: Colors.white30,
             colorBlendMode: BlendMode.lighten,
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
             top: -30,
             left: -40,
             child: Image.asset(
-              'lib/assets/images/hexagon_pattern.png',
+              'lib/assets/images/Elesi.png',
               width: 150,
             ),
           ),
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
             bottom: -40,
             right: -60,
             child: Image.asset(
-              'lib/assets/images/hexagon_pattern.png',
+              'lib/assets/images/Elesi.png',
               width: 150,
             ),
           ),

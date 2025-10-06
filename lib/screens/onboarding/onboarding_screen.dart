@@ -108,19 +108,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
             children: [
               buildOnboardingPage(
-                icon: 'lib/assets/icons/book_icon.png',
-                title: 'Understand your soil\nlike never before!',
-                description: '',
+               icon: 'lib/assets/icons/book_icon.png',
+               title: 'Did you know you could monitor the Egg Production of your chicken at house?',
+               description: '',
               ),
               buildOnboardingPage(
                 icon: 'lib/assets/icons/sensor_icon.png',
-                title: 'With smart sensors and AI, monitor soil health, nutrients, and environmental conditions anytime, from anywhere',
+                title: 'With smart sensors and AI, monitor Chicken health,Egg Production and Environmental conditions anytime, from anywhere.',
                 description: ' ',
                 highlightText: 'anywhere',
               ),
               buildOnboardingPage(
                 icon: 'lib/assets/icons/info_icon.png',
-                title: 'Let\'s get started by gathering a little information...',
+                title: 'Let\'s get started by monitoring the enviromental factors...',
                 description: '',
               ),
             ],

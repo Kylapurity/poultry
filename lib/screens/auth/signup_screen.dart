@@ -123,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
         children: [
           // Background
           Image.asset(
-            'lib/assets/images/soil_background.jpg',
+            'lib/assets/images/Background.png',
             fit: BoxFit.cover,
             color: Colors.white30,
             colorBlendMode: BlendMode.lighten,
@@ -134,7 +134,7 @@ class _SignupScreenState extends State<SignupScreen> {
             top: -30,
             left: -40,
             child: Image.asset(
-              'lib/assets/images/hexagon_pattern.png',
+              'lib/assets/images/Elesi.png',
               width: 150,
             ),
           ),
@@ -144,7 +144,7 @@ class _SignupScreenState extends State<SignupScreen> {
             bottom: -40,
             right: -50,
             child: Image.asset(
-              'lib/assets/images/hexagon_pattern.png',
+              'lib/assets/images/Elesi.png',
               width: 150,
             ),
           ),
@@ -436,7 +436,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 controller: _phoneController,
                                 keyboardType: TextInputType.phone,
                                 decoration: InputDecoration(
-                                  hintText: 'Enter your phone number',
+                                  hintText: 'Amount_of_chicken ',
                                   hintStyle: const TextStyle(
                                     fontFamily: 'Urbanist',
                                     fontSize: 14,
@@ -472,7 +472,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your phone number';
+                                    return 'Please enter Amount_of_chicken ';
                                   }
                                   return null;
                                 },
@@ -506,7 +506,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                             ),
                                           )
                                           : const Text(
-                                            'Get Started',
+                                            'SIGNUP',
                                             style: TextStyle(
                                               fontFamily: 'Urbanist',
                                               fontSize: 16,

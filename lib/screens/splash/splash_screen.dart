@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.didChangeDependencies();
     // Safe place to precache images after context is available
     if (!_imagesLoaded) {
-      precacheImage(const AssetImage('lib/assets/images/soil_background.jpg'), context)
+      precacheImage(const AssetImage('lib/assets/images/Background.png'), context)
         .then((_) {
           if (mounted) setState(() => _imagesLoaded = true);
         });
@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/soil_background.jpg'),
+            image: AssetImage('lib/assets/images/Background.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.white30, 
@@ -71,12 +71,12 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        'PoultryApp',
+                        'PoultrySight',
                         style: TextStyle(
                           fontFamily: 'Lexend',
                           fontSize: 28,
                           fontWeight: FontWeight.w800, // Extra bold for stronger emphasis
-                          color: Color(0xFF5E4935),
+                          color: Color.fromARGB(255, 0, 0, 0),
                           letterSpacing: 1.5,
                         ),
                       ),
@@ -94,16 +94,16 @@ class _SplashScreenState extends State<SplashScreen> {
                         fontFamily: 'Lexend',
                         fontSize: 8,
                         fontWeight: FontWeight.w300,
-                        color: Color(0xFF5E4935),
+                        color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
                     Text(
-                      'BABALOLA',
+                      'Purity Kihiu',
                       style: TextStyle(
                         fontFamily: 'Lexend',
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF5E4935),
+                        color: Color.fromARGB(255, 0, 0, 0),
                         letterSpacing: 1,
                       ),
                     ),
