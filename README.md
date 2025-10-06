@@ -1,15 +1,15 @@
-# 🌱 Poultry App
+# 🥚 Poultry App
 
-**Poultry App** is a smart agriculture mobile application built with Flutter. It monitors **Total-Egg-Production** (e.g., moisture, temperature, vibration) and uses machine learning models to **predict anomalies** and **alert farmers** when environmental conditions become unfavorable for crops.
+**Poultry App** is a smart agriculture mobile application built with Flutter. It monitors **Total-Egg-Production** (e.g., Humidty, temperature, CO2) and uses machine learning models to **predict egg production** and **alert farmers** when environmental conditions become unfavorable for crops.
 
-This app is part of a precision farming ecosystem, aiming to **increase yield, prevent soil degradation**, and **empower farmers with timely, data-driven insights**.
+This app is part of a precision farming ecosystem, aiming to **increase the thir egg production **, and **empower farmers with timely, data-driven insights**.
 
 ---
 
 ## 📦 Features
 
-* 📡 Real-time soil data acquisition via sensors
-* 🔍 Soil condition prediction using a trained ML model
+* 📡 Real-time eniromental data acquisition via sensors
+* 🔍Egg Production prediction using a trained ML model
 * ⚠️ Alerts via vibration or in-app notifications when thresholds are breached
 * 📊 Historical data visualization
 * 🔭 Offline data sync support (optional)
@@ -116,7 +116,7 @@ poultry_app/
 This project uses [Riverpod](https://riverpod.dev) for managing app state:
 
 ```dart
-final soilMoistureProvider = StateProvider<double>((ref) => 0.0);
+final tempratureProvider = StateProvider<double>((ref) => 0.0);
 ```
 
 Alternatively, GetX can be configured if preferred.
@@ -125,11 +125,12 @@ Alternatively, GetX can be configured if preferred.
 
 ## 🧠 Prediction Engine
 
-Soil data (moisture, temperature, etc.) is passed to a trained machine learning model, which returns one of the following:
+Enviromental data (CO2/Ammonium, temperature, etc.) is passed to a trained machine learning model, which returns one of the following:
 
-* ✅ **Optimum**: Soil conditions are optimal.
-* ⚠️ **High**: Parameters nearing harmful thresholds.
-* ❌ **Low**: Immediate action required.
+* ✅ Optimum: Conditions ideal for egg production.
+* ⚠️ High Risk: Parameters nearing harmful thresholds.
+* ❌ Critical: Immediate corrective action required.
+
 
 Results are used to **trigger device vibrations** or notify the farmer via the app UI.
 
