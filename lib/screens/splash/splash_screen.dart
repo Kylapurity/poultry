@@ -1,4 +1,4 @@
-import 'package:fauna_pulse/screens/onboarding/onboarding_screen.dart';
+import 'package:poultry_app/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 /// SplashScreen widget

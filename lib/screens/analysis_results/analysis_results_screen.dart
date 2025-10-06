@@ -1,7 +1,7 @@
-import 'package:fauna_pulse/screens/upload_audio/upload_audio_screen.dart';
+import 'package:poultry_app/screens/upload_audio/upload_audio_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fauna_pulse/screens/dashboard/dashboard_screen.dart';
-import 'package:fauna_pulse/screens/history/history_screen.dart';
+import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
+import 'package:poultry_app/screens/history/history_screen.dart';
 
 class ResultsScreen extends StatefulWidget {
   final String audioFileName;

@@ -1,11 +1,11 @@
-import 'package:fauna_pulse/models/sensor_reading.dart';
-import 'package:fauna_pulse/screens/upload_audio/upload_audio_screen.dart';
-import 'package:fauna_pulse/services/api/api_service.dart';
-import 'package:fauna_pulse/services/notifications/notifications_service.dart';
+import 'package:poultry_app/models/sensor_reading.dart';
+import 'package:poultry_app/screens/upload_audio/upload_audio_screen.dart';
+import 'package:poultry_app/services/api/api_service.dart';
+import 'package:poultry_app/services/notifications/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:fauna_pulse/screens/history/history_screen.dart';
-import 'package:fauna_pulse/screens/chatbot/chatbot_screen.dart';
+import 'package:poultry_app/screens/history/history_screen.dart';
+import 'package:poultry_app/screens/chatbot/chatbot_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});

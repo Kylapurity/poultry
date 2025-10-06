@@ -1,7 +1,7 @@
-import 'package:fauna_pulse/screens/dashboard/dashboard_screen.dart';
-import 'package:fauna_pulse/services/auth/auth_service.dart';
+import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
+import 'package:poultry_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fauna_pulse/screens/auth/login_screen.dart';
+import 'package:poultry_app/screens/auth/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignupScreen extends StatefulWidget {

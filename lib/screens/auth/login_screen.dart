@@ -1,8 +1,8 @@
 
-import 'package:fauna_pulse/services/auth/auth_service.dart';
+import 'package:poultry_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fauna_pulse/screens/auth/signup_screen.dart';
-import 'package:fauna_pulse/screens/dashboard/dashboard_screen.dart';
+import 'package:poultry_app/screens/auth/signup_screen.dart';
+import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

@@ -1,4 +1,4 @@
-package com.example.fauna_pulse
+package com.example.poultry_app
 
 import io.flutter.embedding.android.FlutterActivity
 

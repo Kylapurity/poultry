@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:fauna_pulse/models/ai_response.dart';
+import 'package:poultry_app/models/ai_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 

@@ -1,9 +1,9 @@
 
-import 'package:fauna_pulse/screens/auth/signup_screen.dart';
+import 'package:poultry_app/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-/// OnboardingScreen widget
+/// OnboardingScreen widget   poultry_app_logo
 /// This widget displays an onboarding screen with three pages.
 /// Each page contains an icon, a title, and a description.
 /// The user can navigate through the pages using a PageView.

@@ -1,8 +1,8 @@
-import 'package:fauna_pulse/screens/upload_audio/upload_audio_screen.dart';
-import 'package:fauna_pulse/services/api/groq_chat_service.dart';
+import 'package:poultry_app/screens/upload_audio/upload_audio_screen.dart';
+import 'package:poultry_app/services/api/groq_chat_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fauna_pulse/screens/dashboard/dashboard_screen.dart';
-import 'package:fauna_pulse/screens/history/history_screen.dart';
+import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
+import 'package:poultry_app/screens/history/history_screen.dart';
 enum MessageSender { user, assistant }
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});

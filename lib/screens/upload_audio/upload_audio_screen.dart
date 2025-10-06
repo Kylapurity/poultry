@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:fauna_pulse/screens/analysis_results/analysis_results_screen.dart';
-import 'package:fauna_pulse/services/api/api_service.dart';
+import 'package:poultry_app/screens/analysis_results/analysis_results_screen.dart';
+import 'package:poultry_app/services/api/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:fauna_pulse/screens/dashboard/dashboard_screen.dart';
-import 'package:fauna_pulse/screens/history/history_screen.dart';
+import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
+import 'package:poultry_app/screens/history/history_screen.dart';
 
 class AudioScreen extends StatefulWidget {
   const AudioScreen({super.key});

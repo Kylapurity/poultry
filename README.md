@@ -1,6 +1,6 @@
-# 🌱 Fauna Pulse
+# 🌱 Poultry App
 
-**Fauna Pulse** is a smart agriculture mobile application built with Flutter. It monitors **soil parameters** (e.g., moisture, temperature, vibration) and uses machine learning models to **predict anomalies** and **alert farmers** when environmental conditions become unfavorable for crops.
+**Poultry App** is a smart agriculture mobile application built with Flutter. It monitors **soil parameters** (e.g., moisture, temperature, vibration) and uses machine learning models to **predict anomalies** and **alert farmers** when environmental conditions become unfavorable for crops.
 
 This app is part of a precision farming ecosystem, aiming to **increase yield, prevent soil degradation**, and **empower farmers with timely, data-driven insights**.
 
@@ -50,8 +50,8 @@ lib/
 ### 1. Clone the Project
 
 ```bash
-git clone https://github.com/yourusername/fauna_pulse.git
-cd fauna_pulse
+git clone https://github.com/yourusername/poultry_app.git
+cd poultry_app
 ```
 
 ### 2. Install Dependencies
@@ -73,7 +73,7 @@ flutter run
 ## 💡 Project Structure Overview
 
 ```
-fauna_pulse/
+poultry_app/
 │
 ├── lib/
 │   ├── core/               # App-wide themes, styles, utils

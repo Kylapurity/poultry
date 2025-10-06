@@ -1,6 +1,6 @@
-import 'package:fauna_pulse/screens/splash/splash_screen.dart';
+import 'package:poultry_app/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fauna_pulse/config/themes.dart';
+import 'package:poultry_app/config/themes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// MyApp widget
