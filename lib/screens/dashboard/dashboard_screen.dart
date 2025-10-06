@@ -376,7 +376,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: const Text(
-                                'Soil Metrics',
+                                'Poultry Metrics',
                                 style: TextStyle(
                                   fontFamily: 'Urbanist',
                                   fontSize: 12,
@@ -552,7 +552,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: const Text(
-                                'Soil Nutrients and Conductivity',
+                                'Poultrys and Conductivity',
                                 style: TextStyle(
                                   fontFamily: 'Urbanist',
                                   fontSize: 12,
