@@ -16,7 +16,6 @@ class SensorReading {
 
   // A factory constructor to create a SensorReading from a Map
   factory SensorReading.fromMap(Map<String, dynamic> map) {
-
     return SensorReading(
       activity: map['room_activity']?.toString() ?? 'Unknown',
       temperature: map['temperature']?.toDouble() ?? 0.0,
@@ -25,6 +24,7 @@ class SensorReading {
       ammoniacO2: map['ammonia/cO2']?.toDouble() ?? 0.0,
     );
   }
-  
 
+  /// Backwards-compatible getter expected by UI code
+  double get ammonia => ammoniacO2;
 }

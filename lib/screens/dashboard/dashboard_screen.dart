@@ -87,29 +87,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final temp = _latestReading!.temperature;
     final tempThreshold = thresholds['temperature']!;
     if (temp > tempThreshold['max']!) {
-      alertMessage = 'Temperature is too high (${temp.toStringAsFixed(1)}°C). Adjust ventilation.';
+      alertMessage =
+          'Temperature is too high (${temp.toStringAsFixed(1)}°C). Adjust ventilation.';
     } else if (temp < tempThreshold['min']!) {
-      alertMessage = 'Temperature is too low (${temp.toStringAsFixed(1)}°C). Add heating.';
+      alertMessage =
+          'Temperature is too low (${temp.toStringAsFixed(1)}°C). Add heating.';
     }
 
     final humidity = _latestReading!.humidity;
     final humidityThreshold = thresholds['humidity']!;
     if (humidity > humidityThreshold['max']!) {
-      alertMessage = 'Humidity is too high (${humidity.toStringAsFixed(1)}%). Improve ventilation.';
+      alertMessage =
+          'Humidity is too high (${humidity.toStringAsFixed(1)}%). Improve ventilation.';
     } else if (humidity < humidityThreshold['min']!) {
-      alertMessage = 'Humidity is too low (${humidity.toStringAsFixed(1)}%). Add moisture.';
+      alertMessage =
+          'Humidity is too low (${humidity.toStringAsFixed(1)}%). Add moisture.';
     }
 
     final ammonia = _latestReading!.ammonia;
     final ammoniaThreshold = thresholds['ammonia']!;
     if (ammonia > ammoniaThreshold['max']!) {
-      alertMessage = 'Ammonia level is too high (${ammonia.toStringAsFixed(1)} ppm). Clean coop!';
+      alertMessage =
+          'Ammonia level is too high (${ammonia.toStringAsFixed(1)} ppm). Clean coop!';
     }
 
     final light = _latestReading!.lightIntensity;
     final lightThreshold = thresholds['light_intensity']!;
     if (light < lightThreshold['min']!) {
-      alertMessage = 'Light intensity is too low (${light.toStringAsFixed(1)} lux). Chickens need 14-16 hours of light.';
+      alertMessage =
+          'Light intensity is too low (${light.toStringAsFixed(1)} lux). Chickens need 14-16 hours of light.';
     }
 
     if (alertMessage != null) {
@@ -201,7 +207,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   const Text(
                                     'Egg Production Alert',
                                     style: TextStyle(
-                                      fontFamily: 'Montserrat',
+                                      fontFamily: 'Lexend',
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
@@ -211,7 +217,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   Text(
                                     notificationMessage,
                                     style: const TextStyle(
-                                      fontFamily: 'Montserrat',
+                                      fontFamily: 'Lexend',
                                       fontSize: 15,
                                       color: Colors.white,
                                     ),
@@ -231,7 +237,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const Text(
                             'Dashboard',
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: 'Lexend',
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF3A3A3A),
@@ -242,7 +248,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const Text(
                             'Total Production and Metrics',
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: 'Lexend',
                               fontSize: 15,
                               color: Color(0xFF5A5A5A),
                             ),
@@ -250,7 +256,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const SizedBox(height: 20),
 
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
                             decoration: BoxDecoration(
                               color: const Color(0xFF5E4935),
                               borderRadius: BorderRadius.circular(20),
@@ -258,7 +267,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child: const Text(
                               'Production Activity',
                               style: TextStyle(
-                                fontFamily: 'Montserrat',
+                                fontFamily: 'Lexend',
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -273,7 +282,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: Colors.grey.shade300, width: 1),
+                              border: Border.all(
+                                color: Colors.grey.shade300,
+                                width: 1,
+                              ),
                             ),
                             child: Row(
                               children: [
@@ -284,7 +296,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     color: Colors.grey.shade200,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Icon(Icons.egg_outlined, size: 30, color: Colors.black),
+                                  child: const Icon(
+                                    Icons.egg_outlined,
+                                    size: 30,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 const SizedBox(width: 16),
                                 Column(
@@ -293,7 +309,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     const Text(
                                       'EGG PRODUCTION',
                                       style: TextStyle(
-                                        fontFamily: 'Montserrat',
+                                        fontFamily: 'Lexend',
                                         fontSize: 10,
                                         fontWeight: FontWeight.w600,
                                         color: Color(0xFF3A3A3A),
@@ -301,9 +317,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      _isLoading ? 'Loading...' : (_latestReading?.activity ?? 'High Activity'),
+                                      _isLoading
+                                          ? 'Loading...'
+                                          : (_latestReading?.activity ??
+                                                'High Activity'),
                                       style: const TextStyle(
-                                        fontFamily: 'Montserrat',
+                                        fontFamily: 'Lexend',
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: Color(0xFF4CAF50),
@@ -317,7 +336,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const SizedBox(height: 20),
 
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
                             decoration: BoxDecoration(
                               color: const Color(0xFFE78B41),
                               borderRadius: BorderRadius.circular(20),
@@ -325,7 +347,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child: const Text(
                               'Environmental Conditions',
                               style: TextStyle(
-                                fontFamily: 'Montserrat',
+                                fontFamily: 'Lexend',
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -340,9 +362,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: _buildSimpleCard(
                                   icon: Icons.thermostat,
                                   label: 'TEMPERATURE',
-                                  value: _isLoading ? '--' : (_latestReading?.temperature.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading
+                                      ? '--'
+                                      : (_latestReading?.temperature
+                                                .toStringAsFixed(1) ??
+                                            '0'),
                                   unit: '°C',
-                                  valueColor: _latestReading != null && _latestReading!.temperature > thresholds['temperature']!['max']!
+                                  valueColor:
+                                      _latestReading != null &&
+                                          _latestReading!.temperature >
+                                              thresholds['temperature']!['max']!
                                       ? Colors.red
                                       : const Color(0xFF4CAF50),
                                 ),
@@ -352,9 +381,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: _buildSimpleCard(
                                   icon: Icons.water_drop,
                                   label: 'HUMIDITY',
-                                  value: _isLoading ? '--' : (_latestReading?.humidity.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading
+                                      ? '--'
+                                      : (_latestReading?.humidity
+                                                .toStringAsFixed(1) ??
+                                            '0'),
                                   unit: '%',
-                                  valueColor: _latestReading != null && _latestReading!.humidity > thresholds['humidity']!['max']!
+                                  valueColor:
+                                      _latestReading != null &&
+                                          _latestReading!.humidity >
+                                              thresholds['humidity']!['max']!
                                       ? Colors.red
                                       : const Color(0xFF4CAF50),
                                 ),
@@ -369,9 +405,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: _buildSimpleCard(
                                   icon: Icons.cloud,
                                   label: 'AMMONIA/CO₂',
-                                  value: _isLoading ? '--' : (_latestReading?.ammonia.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading
+                                      ? '--'
+                                      : (_latestReading?.ammonia
+                                                .toStringAsFixed(1) ??
+                                            '0'),
                                   unit: 'ppm',
-                                  valueColor: _latestReading != null && _latestReading!.ammonia > thresholds['ammonia']!['max']!
+                                  valueColor:
+                                      _latestReading != null &&
+                                          _latestReading!.ammonia >
+                                              thresholds['ammonia']!['max']!
                                       ? Colors.red
                                       : const Color(0xFF4CAF50),
                                 ),
@@ -381,7 +424,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: _buildSimpleCard(
                                   icon: Icons.wb_sunny,
                                   label: 'LIGHT INTENSITY',
-                                  value: _isLoading ? '--' : (_latestReading?.lightIntensity.toStringAsFixed(1) ?? '0'),
+                                  value: _isLoading
+                                      ? '--'
+                                      : (_latestReading?.lightIntensity
+                                                .toStringAsFixed(1) ??
+                                            '0'),
                                   unit: 'lux',
                                   valueColor: const Color(0xFF4CAF50),
                                 ),
@@ -391,7 +438,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const SizedBox(height: 20),
 
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
                             decoration: BoxDecoration(
                               color: const Color(0xFFE78B41),
                               borderRadius: BorderRadius.circular(20),
@@ -399,7 +449,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child: const Text(
                               'Metrics Over Time',
                               style: TextStyle(
-                                fontFamily: 'Montserrat',
+                                fontFamily: 'Lexend',
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -414,18 +464,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: Colors.grey.shade300, width: 1),
+                              border: Border.all(
+                                color: Colors.grey.shade300,
+                                width: 1,
+                              ),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
                                       'Metrics Evolution',
                                       style: TextStyle(
-                                        fontFamily: 'Montserrat',
+                                        fontFamily: 'Lexend',
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Color(0xFF3A3A3A),
@@ -438,29 +492,77 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                       child: Row(
                                         children: [
-                                          for (String period in ['1D', '1M', '1Y', 'Max'])
+                                          for (String period in [
+                                            '1D',
+                                            '1M',
+                                            '1Y',
+                                            'Max',
+                                          ])
                                             GestureDetector(
                                               onTap: () async {
-                                                setState(() => selectedTimePeriod = period);
-                                                final historicalData = await _apiService.getHistoricalData(period);
-                                                setState(() => _chartData = _prepareChartData(historicalData));
+                                                setState(
+                                                  () => selectedTimePeriod =
+                                                      period,
+                                                );
+                                                final historicalData =
+                                                    await _apiService
+                                                        .getHistoricalData(
+                                                          period,
+                                                        );
+                                                setState(
+                                                  () => _chartData =
+                                                      _prepareChartData(
+                                                        historicalData,
+                                                      ),
+                                                );
                                               },
                                               child: Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 5,
+                                                    ),
                                                 decoration: BoxDecoration(
-                                                  color: selectedTimePeriod == period ? Colors.white : Colors.transparent,
-                                                  borderRadius: BorderRadius.circular(20),
-                                                  boxShadow: selectedTimePeriod == period
-                                                      ? [BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 1, blurRadius: 2, offset: const Offset(0, 1))]
+                                                  color:
+                                                      selectedTimePeriod ==
+                                                          period
+                                                      ? Colors.white
+                                                      : Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  boxShadow:
+                                                      selectedTimePeriod ==
+                                                          period
+                                                      ? [
+                                                          BoxShadow(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                  0.2,
+                                                                ),
+                                                            spreadRadius: 1,
+                                                            blurRadius: 2,
+                                                            offset:
+                                                                const Offset(
+                                                                  0,
+                                                                  1,
+                                                                ),
+                                                          ),
+                                                        ]
                                                       : null,
                                                 ),
                                                 child: Text(
                                                   period,
                                                   style: TextStyle(
-                                                    fontFamily: 'Montserrat',
+                                                    fontFamily: 'Lexend',
                                                     fontSize: 12,
-                                                    fontWeight: selectedTimePeriod == period ? FontWeight.bold : FontWeight.normal,
-                                                    color: const Color(0xFF3A3A3A),
+                                                    fontWeight:
+                                                        selectedTimePeriod ==
+                                                            period
+                                                        ? FontWeight.bold
+                                                        : FontWeight.normal,
+                                                    color: const Color(
+                                                      0xFF3A3A3A,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -475,80 +577,191 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 SizedBox(
                                   height: 160,
                                   child: _chartData.isEmpty
-                                      ? const Center(child: Text('No chart data available'))
+                                      ? const Center(
+                                          child: Text(
+                                            'No chart data available',
+                                          ),
+                                        )
                                       : Builder(
-                                        builder: (context) {
-                                          final boundaries = _getChartBoundaries();
-                                          return LineChart(
-                                            LineChartData(
-                                              lineBarsData: _chartData.asMap().entries.map((entry) {
-                                                int index = entry.key;
-                                                List<FlSpot> spots = entry.value;
-                                                Color color = index == 0 ? Colors.red : (index == 1 ? Colors.blue : Colors.orange);
-                                                return LineChartBarData(spots: spots, color: color, isCurved: true, dotData: FlDotData(show: true));
-                                              }).toList(),
-                                              lineTouchData: LineTouchData(
-                                                touchTooltipData: LineTouchTooltipData(
-                                                  getTooltipColor: (touchedSpot) => Colors.white,
-                                                  getTooltipItems: (List<LineBarSpot> touchedSpots) {
-                                                    return touchedSpots.map((spot) {
-                                                      String tooltipText = '';
-                                                      Color textColor;
-                                                      if (spot.barIndex == 0) {
-                                                        tooltipText = 'Temp: ${spot.y.toStringAsFixed(1)}°C';
-                                                        textColor = Colors.red;
-                                                      } else if (spot.barIndex == 1) {
-                                                        tooltipText = 'Humidity: ${spot.y.toStringAsFixed(1)}%';
-                                                        textColor = Colors.blue;
-                                                      } else {
-                                                        tooltipText = 'Ammonia: ${spot.y.toStringAsFixed(1)} ppm';
-                                                        textColor = Colors.orange;
-                                                      }
-                                                      return LineTooltipItem(tooltipText, TextStyle(fontFamily: 'Montserrat', color: textColor, fontWeight: FontWeight.bold, fontSize: 12));
-                                                    }).toList();
-                                                  },
+                                          builder: (context) {
+                                            final boundaries =
+                                                _getChartBoundaries();
+                                            return LineChart(
+                                              LineChartData(
+                                                lineBarsData: _chartData
+                                                    .asMap()
+                                                    .entries
+                                                    .map((entry) {
+                                                      int index = entry.key;
+                                                      List<FlSpot> spots =
+                                                          entry.value;
+                                                      Color color = index == 0
+                                                          ? Colors.red
+                                                          : (index == 1
+                                                                ? Colors.blue
+                                                                : Colors
+                                                                      .orange);
+                                                      return LineChartBarData(
+                                                        spots: spots,
+                                                        color: color,
+                                                        isCurved: true,
+                                                        dotData: FlDotData(
+                                                          show: true,
+                                                        ),
+                                                      );
+                                                    })
+                                                    .toList(),
+                                                lineTouchData: LineTouchData(
+                                                  touchTooltipData: LineTouchTooltipData(
+                                                    getTooltipColor:
+                                                        (touchedSpot) =>
+                                                            Colors.white,
+                                                    getTooltipItems:
+                                                        (
+                                                          List<LineBarSpot>
+                                                          touchedSpots,
+                                                        ) {
+                                                          return touchedSpots.map((
+                                                            spot,
+                                                          ) {
+                                                            String tooltipText =
+                                                                '';
+                                                            Color textColor;
+                                                            if (spot.barIndex ==
+                                                                0) {
+                                                              tooltipText =
+                                                                  'Temp: ${spot.y.toStringAsFixed(1)}°C';
+                                                              textColor =
+                                                                  Colors.red;
+                                                            } else if (spot
+                                                                    .barIndex ==
+                                                                1) {
+                                                              tooltipText =
+                                                                  'Humidity: ${spot.y.toStringAsFixed(1)}%';
+                                                              textColor =
+                                                                  Colors.blue;
+                                                            } else {
+                                                              tooltipText =
+                                                                  'Ammonia: ${spot.y.toStringAsFixed(1)} ppm';
+                                                              textColor =
+                                                                  Colors.orange;
+                                                            }
+                                                            return LineTooltipItem(
+                                                              tooltipText,
+                                                              TextStyle(
+                                                                fontFamily:
+                                                                    'Lexend',
+                                                                color:
+                                                                    textColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 12,
+                                                              ),
+                                                            );
+                                                          }).toList();
+                                                        },
+                                                  ),
+                                                  handleBuiltInTouches: true,
                                                 ),
-                                                handleBuiltInTouches: true,
-                                              ),
-                                              gridData: FlGridData(
-                                                drawHorizontalLine: true,
-                                                horizontalInterval: (boundaries['maxY']! - boundaries['minY']!) / 4,
-                                                getDrawingHorizontalLine: (value) => FlLine(color: Colors.grey.shade200, strokeWidth: 1, dashArray: [5, 5]),
-                                                drawVerticalLine: false,
-                                              ),
-                                              titlesData: FlTitlesData(
-                                                bottomTitles: AxisTitles(
-                                                  sideTitles: SideTitles(
-                                                    showTitles: true,
-                                                    getTitlesWidget: (value, meta) => Padding(
-                                                      padding: const EdgeInsets.only(top: 8.0),
-                                                      child: Text(value.toInt().toString(), style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey.shade500, fontSize: 10)),
+                                                gridData: FlGridData(
+                                                  drawHorizontalLine: true,
+                                                  horizontalInterval:
+                                                      (boundaries['maxY']! -
+                                                          boundaries['minY']!) /
+                                                      4,
+                                                  getDrawingHorizontalLine:
+                                                      (value) => FlLine(
+                                                        color: Colors
+                                                            .grey
+                                                            .shade200,
+                                                        strokeWidth: 1,
+                                                        dashArray: [5, 5],
+                                                      ),
+                                                  drawVerticalLine: false,
+                                                ),
+                                                titlesData: FlTitlesData(
+                                                  bottomTitles: AxisTitles(
+                                                    sideTitles: SideTitles(
+                                                      showTitles: true,
+                                                      getTitlesWidget:
+                                                          (
+                                                            value,
+                                                            meta,
+                                                          ) => Padding(
+                                                            padding:
+                                                                const EdgeInsets.only(
+                                                                  top: 8.0,
+                                                                ),
+                                                            child: Text(
+                                                              value
+                                                                  .toInt()
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'Lexend',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade500,
+                                                                fontSize: 10,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                      reservedSize: 22,
                                                     ),
-                                                    reservedSize: 22,
+                                                  ),
+                                                  leftTitles: AxisTitles(
+                                                    sideTitles: SideTitles(
+                                                      showTitles: true,
+                                                      getTitlesWidget:
+                                                          (
+                                                            value,
+                                                            meta,
+                                                          ) => Padding(
+                                                            padding:
+                                                                const EdgeInsets.only(
+                                                                  right: 8.0,
+                                                                ),
+                                                            child: Text(
+                                                              value
+                                                                  .toStringAsFixed(
+                                                                    0,
+                                                                  ),
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'Lexend',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade500,
+                                                                fontSize: 10,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                      reservedSize: 22,
+                                                    ),
+                                                  ),
+                                                  topTitles: const AxisTitles(
+                                                    sideTitles: SideTitles(
+                                                      showTitles: false,
+                                                    ),
+                                                  ),
+                                                  rightTitles: const AxisTitles(
+                                                    sideTitles: SideTitles(
+                                                      showTitles: false,
+                                                    ),
                                                   ),
                                                 ),
-                                                leftTitles: AxisTitles(
-                                                  sideTitles: SideTitles(
-                                                    showTitles: true,
-                                                    getTitlesWidget: (value, meta) => Padding(
-                                                      padding: const EdgeInsets.only(right: 8.0),
-                                                      child: Text(value.toStringAsFixed(0), style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey.shade500, fontSize: 10)),
-                                                    ),
-                                                    reservedSize: 22,
-                                                  ),
+                                                borderData: FlBorderData(
+                                                  show: false,
                                                 ),
-                                                topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                                                rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                                                minX: boundaries['minX']!,
+                                                maxX: boundaries['maxX']!,
+                                                minY: boundaries['minY']!,
+                                                maxY: boundaries['maxY']!,
                                               ),
-                                              borderData: FlBorderData(show: false),
-                                              minX: boundaries['minX']!,
-                                              maxX: boundaries['maxX']!,
-                                              minY: boundaries['minY']!,
-                                              maxY: boundaries['maxY']!,
-                                            ),
-                                          );
-                                        },
-                                      ),
+                                            );
+                                          },
+                                        ),
                                 ),
                                 const SizedBox(height: 16),
 
@@ -582,16 +795,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   type: BottomNavigationBarType.fixed,
                   elevation: 8,
                   items: const [
-                    BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
-                    BottomNavigationBarItem(icon: Icon(Icons.mic), label: 'Audio'),
-                    BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.dashboard),
+                      label: 'Dashboard',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.history),
+                      label: 'History',
+                    ),
                   ],
                   onTap: (index) {
                     if (index == 0) return;
                     if (index == 1) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AudioScreen()));
-                    } else if (index == 2) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HistoryScreen()));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HistoryScreen(),
+                        ),
+                      );
                     }
                   },
                 ),
@@ -602,9 +823,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
               right: 22,
               bottom: 80,
               child: FloatingActionButton(
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatbotScreen())),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChatbotScreen(),
+                  ),
+                ),
                 backgroundColor: const Color(0xFFE78B41),
-                child: const Icon(Icons.chat_bubble_outline, color: Colors.white),
+                child: const Icon(
+                  Icons.chat_bubble_outline,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -613,14 +842,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildSimpleCard({required IconData icon, required String label, required String value, String unit = '', Color valueColor = const Color(0xFF4CAF50)}) {
+  Widget _buildSimpleCard({
+    required IconData icon,
+    required String label,
+    required String value,
+    String unit = '',
+    Color valueColor = const Color(0xFF4CAF50),
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.shade300, width: 1),
-        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.05), blurRadius: 2, offset: const Offset(0, 1))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.05),
+            blurRadius: 2,
+            offset: const Offset(0, 1),
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -629,7 +870,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Container(
               width: 50,
               height: 50,
-              decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: Icon(icon, size: 24, color: Colors.black),
             ),
             const SizedBox(width: 10),
@@ -637,14 +881,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(label, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 8, fontWeight: FontWeight.bold, color: Color(0xFF3A3A3A)), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      fontFamily: 'Lexend',
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF3A3A3A),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 1),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text(value, style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, fontWeight: FontWeight.bold, color: valueColor)),
-                      if (unit.isNotEmpty) Padding(padding: const EdgeInsets.only(left: 2.0), child: Text(unit, style: TextStyle(fontFamily: 'Montserrat', fontSize: 10, fontWeight: FontWeight.w500, color: Colors.grey.shade600))),
+                      Text(
+                        value,
+                        style: TextStyle(
+                          fontFamily: 'Lexend',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: valueColor,
+                        ),
+                      ),
+                      if (unit.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2.0),
+                          child: Text(
+                            unit,
+                            style: TextStyle(
+                              fontFamily: 'Lexend',
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ],
@@ -659,19 +933,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildLegendItem(String label, Color color) {
     return Row(
       children: [
-        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(fontFamily: 'Montserrat', fontSize: 12, color: Color(0xFF3A3A3A))),
+        Text(
+          label,
+          style: const TextStyle(
+            fontFamily: 'Lexend',
+            fontSize: 12,
+            color: Color(0xFF3A3A3A),
+          ),
+        ),
       ],
     );
-  }
-}
-
-class AudioScreen extends StatelessWidget {
-  const AudioScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('Audio')), body: const Center(child: Text('Audio Screen')));
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:poultry_app/models/ai_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -7,8 +8,7 @@ class GroqService {
   final SupabaseClient _supabase = Supabase.instance.client;
   final String apiUrl =
       "https://api.groq.com/openai/v1/chat/completions"; // Replace with actual API URL
-  final String apiKey =
-      "your-api-key"; // Replace with your API key;
+  final String apiKey = "your-api-key"; // Replace with your API key;
 
   Future<AIResponse> sendMessage(String message) async {
     final headers = {
@@ -47,7 +47,7 @@ class GroqService {
         final Map<String, dynamic> jsonContent = jsonDecode(content);
         return AIResponse.fromJson(jsonContent);
       } catch (e) {
-        print("❌ Error parsing Groq JSON content: $e");
+        debugPrint("❌ Error parsing Groq JSON content: $e");
         throw Exception("Error parsing Groq JSON content: $e");
       }
     } else {
@@ -63,7 +63,7 @@ class GroqService {
     final user = _supabase.auth.currentUser;
     if (user == null) {
       // It's best to prevent logged-out users from even trying to send a message.
-      print('Authentication Error: User is not logged in.');
+      debugPrint('Authentication Error: User is not logged in.');
       return;
     }
 
@@ -78,7 +78,7 @@ class GroqService {
         'message': message,
       });
     } catch (error) {
-      print('Database error saving message: $error');
+      debugPrint('Database error saving message: $error');
       // Optionally rethrow the error if you want to handle it in the UI
       rethrow;
     }

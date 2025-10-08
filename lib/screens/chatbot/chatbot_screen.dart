@@ -1,9 +1,10 @@
-import 'package:poultry_app/screens/upload_audio/upload_audio_screen.dart';
 import 'package:poultry_app/services/api/groq_chat_service.dart';
 import 'package:flutter/material.dart';
-import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
 import 'package:poultry_app/screens/history/history_screen.dart';
+import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
+
 enum MessageSender { user, assistant }
+
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});
 
@@ -16,7 +17,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _isSending = false;
   final GroqService _groqService = GroqService();
-  
 
   // List of chat messages
   final List<Map<String, dynamic>> _messages = [
@@ -25,7 +25,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       'message': 'Hello there\nHow can I help you?',
       'time': 'Now',
     },
-    
   ];
 
   @override
@@ -54,26 +53,24 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     try {
       await _groqService.saveChatMessage(role: 'user', message: message);
 
-
       final aiReply = await _groqService.sendMessage(message);
       final aiMessageContent = '${aiReply.response}\n\n💡 ${aiReply.advice}';
-
 
       if (mounted) {
         setState(() {
           _isSending = false;
           _messages.add({
             'sender': MessageSender.assistant,
-            'message': aiReply!.response + '\n\n💡 ' + aiReply.advice,
+            'message': aiReply.response + '\n\n💡 ' + aiReply.advice,
             'time': _getCurrentTime(),
           });
         });
         _scrollToBottom();
       }
       await _groqService.saveChatMessage(
-      role: 'assistant',
-      message: aiMessageContent,
-    );
+        role: 'assistant',
+        message: aiMessageContent,
+      );
     } catch (e) {
       setState(() {
         _isSending = false;
@@ -181,8 +178,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                     final isUser = message['sender'] == MessageSender.user;
 
                     return Align(
-                      alignment:
-                          isUser ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: isUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Row(
@@ -225,10 +223,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                                   14,
                                 ), // Increased padding
                                 decoration: BoxDecoration(
-                                  color:
-                                      isUser
-                                          ? const Color(0xFFE7E7E7)
-                                          : Colors.white,
+                                  color: isUser
+                                      ? const Color(0xFFE7E7E7)
+                                      : Colors.white,
                                   borderRadius: BorderRadius.circular(16),
                                   boxShadow: [
                                     BoxShadow(
@@ -246,10 +243,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                                       style: TextStyle(
                                         fontFamily: 'Urbanist',
                                         fontSize: 15, // Increased font size
-                                        color:
-                                            isUser
-                                                ? const Color(0xFF3A3A3A)
-                                                : const Color(0xFF3A3A3A),
+                                        color: isUser
+                                            ? const Color(0xFF3A3A3A)
+                                            : const Color(0xFF3A3A3A),
                                       ),
                                     ),
                                     const SizedBox(
@@ -332,21 +328,20 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                         color: Colors.black,
                       ),
                       child: IconButton(
-                        icon:
-                            _isSending
-                                ? const SizedBox(
-                                  width: 22, // Increased size
-                                  height: 22, // Increased size
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                                : const Icon(
-                                  Icons.send,
+                        icon: _isSending
+                            ? const SizedBox(
+                                width: 22, // Increased size
+                                height: 22, // Increased size
+                                child: CircularProgressIndicator(
                                   color: Colors.white,
-                                  size: 22, // Increased size
+                                  strokeWidth: 2,
                                 ),
+                              )
+                            : const Icon(
+                                Icons.send,
+                                color: Colors.white,
+                                size: 22, // Increased size
+                              ),
                         onPressed: _isSending ? null : _sendMessage,
                       ),
                     ),
@@ -356,8 +351,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
               // Bottom Navigation Bar
               BottomNavigationBar(
-                currentIndex:
-                    1, // Setting to 1 for now (Audio), adjust as needed
+                currentIndex: 0, // Dashboard is now index 0
                 backgroundColor: Colors.white,
                 selectedItemColor: const Color(0xFF5E4935),
                 unselectedItemColor: Colors.grey,
@@ -369,10 +363,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                   BottomNavigationBarItem(
                     icon: Icon(Icons.dashboard),
                     label: 'Dashboard',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.mic),
-                    label: 'Audio',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.history),
@@ -390,14 +380,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                       );
                       break;
                     case 1:
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AudioScreen(),
-                        ),
-                      );
-                      break;
-                    case 2:
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

@@ -1,4 +1,3 @@
-import 'package:poultry_app/screens/upload_audio/upload_audio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -17,31 +16,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
   bool isPreviousChatsExpanded = false;
   bool isPastReadingsExpanded = true;
 
-  // Sample data
-  final List<String> notifications = [
-    'Temperature was abnormally high',
-    'Light Intesity levels dropped below threshold',
-    'CO2 has increased significantly',
-  ];
-
-  final List<String> previousChats = [
-    'What is agriculture?',
-    'How to improve soil health?',
-    'What plants grow best in alkaline soil?',
-  ];
-
-  final List<Map<String, dynamic>> pastReadings = [
-    {'temperature': 34, 'humidity': 98, 'timestamp': '2023-05-15 14:30'},
-    {'temperature': 32, 'humidity': 95, 'timestamp': '2023-05-15 10:15'},
-    {'temperature': 28, 'humidity': 92, 'timestamp': '2023-05-14 16:45'},
-    {'temperature': 26, 'humidity': 90, 'timestamp': '2023-05-14 12:30'},
-    {'temperature': 23, 'humidity': 99, 'timestamp': '2023-05-13 18:20'},
-    {'temperature': 22, 'humidity': 98, 'timestamp': '2023-05-13 14:10'},
-  ];
-
-  List<Map<String, dynamic>> notifications = [];
-  List<Map<String, dynamic>> previousChats = [];
-  List<Map<String, dynamic>> pastReadings = [];
+  // Data holders (will be populated from Supabase).
+  List<Map<String, dynamic>> notificationsData = [];
+  List<Map<String, dynamic>> previousChatsData = [];
+  List<Map<String, dynamic>> pastReadingsData = [];
 
   bool isLoading = true;
   String? error;
@@ -62,7 +40,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       final response = await _supabase
           .from('history')
           .select()
-          .eq('user_id', _supabase.auth.currentUser?.id as Object )
+          .eq('user_id', _supabase.auth.currentUser?.id as Object)
           .order('created_at', ascending: false); // Fixed: was 'timestamp'
 
       final List<Map<String, dynamic>> historyData =
@@ -70,20 +48,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
       // Group data by type
       setState(() {
-        notifications =
-            historyData
-                .where(
-                  (item) =>
-                      item['type'] == 'notification' ||
-                      item['type'] == 'sensor_alert',
-                )
-                .toList();
+        notificationsData = historyData
+            .where(
+              (item) =>
+                  item['type'] == 'notification' ||
+                  item['type'] == 'sensor_alert',
+            )
+            .toList();
 
-        previousChats =
-            historyData.where((item) => item['type'] == 'chat').toList();
+        previousChatsData = historyData
+            .where((item) => item['type'] == 'chat')
+            .toList();
 
-        pastReadings =
-            historyData.where((item) => item['type'] == 'recording').toList();
+        pastReadingsData = historyData
+            .where((item) => item['type'] == 'recording')
+            .toList();
 
         isLoading = false;
       });
@@ -105,7 +84,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
       return 'Invalid date';
     }
   }
- @override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -122,7 +102,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 22.0,
+                    vertical: 12.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -134,7 +117,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ),
                       ),
                       const SizedBox(height: 25),
-                      
+
                       // History Title
                       const Text(
                         'History',
@@ -145,7 +128,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           color: Color(0xFF3A3A3A),
                         ),
                       ),
-                      
+
                       // Subtitle with refresh option
                       Row(
                         children: [
@@ -167,7 +150,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ],
                       ),
                       const SizedBox(height: 24),
-                      
+
                       // Loading indicator
                       if (isLoading)
                         const Center(
@@ -191,62 +174,69 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         // Notifications Section
                         _buildSection(
                           title: 'NOTIFICATIONS',
-                          items: notifications,
+                          items: notificationsData,
                           isExpanded: isNotificationsExpanded,
                           onToggle: () {
                             setState(() {
-                              isNotificationsExpanded = !isNotificationsExpanded;
+                              isNotificationsExpanded =
+                                  !isNotificationsExpanded;
                             });
                           },
-                          itemBuilder: (item) => '${item['title'] ?? 'Notification'}: ${item['description'] ?? 'No description'}',
+                          itemBuilder: (item) =>
+                              '${item['title'] ?? 'Notification'}: ${item['description'] ?? 'No description'}',
                         ),
-                        
+
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 12.0),
                           child: Divider(height: 1, color: Colors.grey),
                         ),
-                        
+
                         // Previous Chats Section
                         _buildSection(
                           title: 'PREVIOUS CHATS',
-                          items: previousChats,
+                          items: previousChatsData,
                           isExpanded: isPreviousChatsExpanded,
                           onToggle: () {
                             setState(() {
-                              isPreviousChatsExpanded = !isPreviousChatsExpanded;
+                              isPreviousChatsExpanded =
+                                  !isPreviousChatsExpanded;
                             });
                           },
-                          itemBuilder: (item) => item['description'] ?? item['title'] ?? 'Chat message',
+                          itemBuilder: (item) =>
+                              item['description'] ??
+                              item['title'] ??
+                              'Chat message',
                         ),
-                        
+
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 12.0),
                           child: Divider(height: 1, color: Colors.grey),
                         ),
-                        
+
                         // Past Readings Section
                         _buildSection(
                           title: 'PAST READINGS',
-                          items: pastReadings,
+                          items: pastReadingsData,
                           isExpanded: isPastReadingsExpanded,
                           onToggle: () {
                             setState(() {
                               isPastReadingsExpanded = !isPastReadingsExpanded;
                             });
                           },
-                          itemBuilder: (item) => '${item['title'] ?? 'Recording'}: ${item['description'] ?? 'Audio recording'} - ${_formatTimestamp(item['created_at'])}',
+                          itemBuilder: (item) =>
+                              '${item['title'] ?? 'Recording'}: ${item['description'] ?? 'Audio recording'} - ${_formatTimestamp(item['created_at'])}',
                         ),
                       ],
-                      
+
                       const SizedBox(height: 24),
                     ],
                   ),
                 ),
               ),
-              
+
               // Bottom Navigation
               BottomNavigationBar(
-                currentIndex: 2,
+                currentIndex: 1,
                 backgroundColor: Colors.white,
                 selectedItemColor: const Color(0xFF5E4935),
                 unselectedItemColor: Colors.grey,
@@ -259,26 +249,19 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     label: 'Dashboard',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.mic),
-                    label: 'Audio',
-                  ),
-                  BottomNavigationBarItem(
                     icon: Icon(Icons.history),
                     label: 'History',
                   ),
                 ],
                 onTap: (index) {
-                  if (index == 2) return; // Already on history
-                  
+                  if (index == 1) return; // Already on history
+
                   if (index == 0) {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const DashboardScreen()),
-                    );
-                  } else if (index == 1) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const AudioScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => const DashboardScreen(),
+                      ),
                     );
                   }
                 },
@@ -327,10 +310,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Colors.grey.shade300,
-                width: 1,
-              ),
+              border: Border.all(color: Colors.grey.shade300, width: 1),
             ),
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -374,8 +354,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               icon: Icon(
-                isExpanded 
-                    ? Icons.keyboard_arrow_up 
+                isExpanded
+                    ? Icons.keyboard_arrow_up
                     : Icons.keyboard_arrow_down,
                 size: 20,
                 color: const Color(0xFF5E4935),
@@ -385,14 +365,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ],
         ),
         const SizedBox(height: 8),
-        
+
         // First item (always visible)
         _buildHistoryItem(
           text: itemBuilder(items[0]),
           isExpanded: false,
           onToggle: onToggle,
         ),
-        
+
         // Expanded items
         if (isExpanded && items.length > 1)
           Container(
@@ -450,10 +430,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 1,
-        ),
+        border: Border.all(color: Colors.grey.shade300, width: 1),
       ),
       child: Material(
         color: Colors.transparent,

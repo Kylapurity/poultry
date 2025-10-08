@@ -1,12 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 class ApiService {
   final SupabaseClient _supabase = Supabase.instance.client;
@@ -44,13 +39,12 @@ class ApiService {
       }
 
       // Attempt to fetch data from Supabase
-      final response =
-          await _supabase
-              .from('environmental_data') // Fixed table name
-              .select()
-              .order('created_at', ascending: false) // Fixed column name
-              .limit(1)
-              .maybeSingle();
+      final response = await _supabase
+          .from('environmental_data') // Fixed table name
+          .select()
+          .order('created_at', ascending: false) // Fixed column name
+          .limit(1)
+          .maybeSingle();
 
       if (response == null) {
         if (context != null) {
@@ -146,148 +140,6 @@ class ApiService {
       return List<Map<String, dynamic>>.from(response);
     } catch (e) {
       throw Exception('Failed to fetch history data: $e');
-    }
-  }
-
-  /// Audio Recording Methods
-  Future<Map<String, String>> uploadAudioRecording(File audioFile) async {
-    try {
-      final fileName =
-          'recordings/${DateTime.now().millisecondsSinceEpoch}.wav';
-
-      // Upload to Supabase Storage
-      // await _supabase.storage
-      //     .from('recordings')
-      //     .upload(fileName, audioFile);
-      await _supabase.storage
-          .from('recordings')
-          .upload(
-            fileName,
-            audioFile,
-            fileOptions: const FileOptions(
-              cacheControl: '3600', // Cache for 1 hour
-              upsert: false, // Do not overwrite if file exists
-              contentType: 'audio/wav', // Explicitly set content type
-            ),
-          );
-
-      // Get public URL
-      final String publicUrl = _supabase.storage
-          .from('recordings')
-          .getPublicUrl(fileName);
-
-      // Create record in recordings table
-      final response =
-          await _supabase
-              .from('audio_recordings')
-              .insert({
-                'file_url':
-                    publicUrl, // Use 'file_url' as per your table schema
-                'from_phone': true,
-                'prediction': null, // Initialize prediction as null
-                'confidence_score': null, // Initialize confidence_score as null
-                'created_at': DateTime.now().toIso8601String(),
-                'user_id':
-                    _supabase
-                        .auth
-                        .currentUser
-                        ?.id, // Uncomment if you have user authentication
-              })
-              .select()
-              .single();
-
-      return {'id': response['id'] as String, 'url': publicUrl};
-    } catch (e) {
-      throw Exception('Failed to upload audio: $e');
-    }
-  }
-
-  Future<Map<String, dynamic>> getModelPrediction(String audioFilePath) async {
-    // The API endpoint URL
-    final url = Uri.parse('https://sammyg123-faunapulse.hf.space/predict');
-
-    try {
-      // Verify the file exists
-      final file = File(audioFilePath);
-      if (!await file.exists()) {
-        throw Exception('Audio file not found at path: $audioFilePath');
-      }
-
-      // Create a multipart request for file upload
-      final request = http.MultipartRequest('POST', url);
-
-      // Attach the audio file to the request
-      request.files.add(
-        await http.MultipartFile.fromPath(
-          'file',
-          audioFilePath,
-          // Optional: specify content type
-          // contentType: MediaType('audio', 'wav'), // Uncomment if you import 'package:http_parser/http_parser.dart'
-        ),
-      );
-
-      // Send the request and wait for the response
-      final streamedResponse = await request.send();
-
-      // Read and decode the response
-      final response = await http.Response.fromStream(streamedResponse);
-
-      print('API Response Status: ${response.statusCode}');
-      print('API Response Body: ${response.body}');
-
-      if (response.statusCode != 200) {
-        throw Exception(
-          'Failed to get prediction: ${response.statusCode} ${response.body}',
-        );
-      }
-
-      // Decode the JSON response body
-      final data = jsonDecode(response.body);
-
-      // Validate response structure
-      if (!data.containsKey('class') || !data.containsKey('confidence')) {
-        throw Exception('Invalid response format from prediction API');
-      }
-
-      // Extract the prediction from the 'class' field
-      final String prediction = data['class']?.toString() ?? '';
-
-      if (prediction.isEmpty) {
-        throw Exception('Empty prediction received from API');
-      }
-
-      // Extract and parse the confidence score
-      final String confidenceStr = data['confidence']?.toString() ?? '0';
-      final double confidenceScore =
-          double.tryParse(
-            confidenceStr.replaceAll('%', '').replaceAll(' ', ''),
-          ) ??
-          0.0;
-
-      // Return the result in a map
-      return {'prediction': prediction, 'confidence_score': confidenceScore};
-    } catch (e) {
-      print('Error in getModelPrediction: $e');
-      // Return a map with an error message for consistent return type
-      return {'error': 'Unable to analyze audio: ${e.toString()}'};
-    }
-  }
-
-  Future<void> updateAudioRecordingPrediction(
-    String recordingId,
-    String prediction,
-    double confidenceScore,
-  ) async {
-    try {
-      await _supabase
-          .from('audio_recordings')
-          .update({
-            'prediction': prediction,
-            'confidence_score': confidenceScore,
-          })
-          .eq('id', recordingId); // Update the record where 'id' matches
-    } catch (e) {
-      throw Exception('Failed to update audio recording prediction: $e');
     }
   }
 

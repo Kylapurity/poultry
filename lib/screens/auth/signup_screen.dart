@@ -1,8 +1,7 @@
-import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
+// dashboard import removed; Signup navigates to LoginScreen after signup
 import 'package:poultry_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:poultry_app/screens/auth/login_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -30,7 +29,6 @@ class _SignupScreenState extends State<SignupScreen> {
     _phoneController.dispose();
     super.dispose();
   }
- 
 
   // Simulated signup function
   Future<void> _handleSignup() async {
@@ -47,67 +45,43 @@ class _SignupScreenState extends State<SignupScreen> {
         username,
       );
 
+      // Ensure widget still mounted before touching context/state after async work
+      if (!mounted) return;
+
       if (_formKey.currentState!.validate()) {
         setState(() {
           _isLoading = true;
         });
 
-        if (mounted) {
-          setState(() {
-            _isLoading = false;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Signup successful!'),
-              backgroundColor: Colors.green,
-            ),
-          );
-          // Navigate to Dashboard
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
-          );
-        }
-      }
-    } catch (e) {
-      // Handle error, show message to user
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Signup failed: $e')));
-      return;
-    }
-  }
-
-  Future<void> _handleGoogleSignup() async {
-     setState(() {
-      _isLoading = true;
-    });
-
-    final googleLoginState = await authService.signInWithGoogle();
-
-    try {
-      if (mounted && (googleLoginState!=null)) {
         setState(() {
           _isLoading = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Login successful!'),
+            content: const Text('Signup successful!'),
             backgroundColor: Colors.green,
           ),
         );
+        // Navigate to Login (after signup)
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const DashboardScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
       }
     } catch (e) {
+      // Handle error, show message to user
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text("Error: $e")));
+        ).showSnackBar(SnackBar(content: Text('Signup failed: $e')));
       }
+      return;
     }
   }
- 
+
+  // Note: Google signup handler removed because it was not referenced.
+  // Re-add a properly wired Google sign-in handler when the UI includes a
+  // button that calls it.
+
   @override
   Widget build(BuildContext context) {
     // Get screen size to calculate dynamic spacing
@@ -133,20 +107,14 @@ class _SignupScreenState extends State<SignupScreen> {
           Positioned(
             top: -30,
             left: -40,
-            child: Image.asset(
-              'lib/assets/images/Elesi.png',
-              width: 150,
-            ),
+            child: Image.asset('lib/assets/images/Elesi.png', width: 150),
           ),
 
           // Hexagon at bottom right
           Positioned(
             bottom: -40,
             right: -50,
-            child: Image.asset(
-              'lib/assets/images/Elesi.png',
-              width: 150,
-            ),
+            child: Image.asset('lib/assets/images/Elesi.png', width: 150),
           ),
 
           // Main content - only enable scrolling if really needed
@@ -495,24 +463,23 @@ class _SignupScreenState extends State<SignupScreen> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  child:
-                                      _isLoading
-                                          ? const SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: CircularProgressIndicator(
-                                              color: Colors.white,
-                                              strokeWidth: 2,
-                                            ),
-                                          )
-                                          : const Text(
-                                            'SIGNUP',
-                                            style: TextStyle(
-                                              fontFamily: 'Urbanist',
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                  child: _isLoading
+                                      ? const SizedBox(
+                                          height: 20,
+                                          width: 20,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2,
                                           ),
+                                        )
+                                      : const Text(
+                                          'SIGNUP',
+                                          style: TextStyle(
+                                            fontFamily: 'Urbanist',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                 ),
                               ),
 
@@ -576,18 +543,16 @@ class _SignupScreenState extends State<SignupScreen> {
                               // Login link
                               Center(
                                 child: TextButton(
-                                  onPressed:
-                                      _isLoading
-                                          ? null
-                                          : () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (context) =>
-                                                        const LoginScreen(),
-                                              ),
-                                            );
-                                          },
+                                  onPressed: _isLoading
+                                      ? null
+                                      : () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginScreen(),
+                                            ),
+                                          );
+                                        },
                                   child: const Text(
                                     'Already have an account? Login',
                                     style: TextStyle(

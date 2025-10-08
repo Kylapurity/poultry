@@ -1,7 +1,5 @@
-
 // Create a separate widget file: lib/widgets/bottom_navigation.dart
 
-import 'package:poultry_app/screens/upload_audio/upload_audio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:poultry_app/screens/dashboard/dashboard_screen.dart';
 import 'package:poultry_app/screens/history/history_screen.dart';
@@ -9,10 +7,7 @@ import 'package:poultry_app/screens/history/history_screen.dart';
 class BottomNavigation extends StatelessWidget {
   final int currentIndex;
 
-  const BottomNavigation({
-    super.key,
-    required this.currentIndex,
-  });
+  const BottomNavigation({super.key, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +24,11 @@ class BottomNavigation extends StatelessWidget {
           icon: Icon(Icons.dashboard),
           label: 'Dashboard',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.mic),
-          label: 'Audio',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.history),
-          label: 'History',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
       ],
       onTap: (index) {
         if (index == currentIndex) return;
-        
+
         switch (index) {
           case 0:
             Navigator.pushReplacement(
@@ -49,12 +37,6 @@ class BottomNavigation extends StatelessWidget {
             );
             break;
           case 1:
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const AudioScreen()),
-            );
-            break;
-          case 2:
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HistoryScreen()),

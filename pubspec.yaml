@@ -74,13 +74,3 @@ flutter:
         - asset: lib/assets/fonts/Urbanist/Urbanist-BlackItalic.ttf
           weight: 900
           style: italic
-
-    - family: Montserrat
-      fonts:
-        - asset: lib/assets/fonts/Montserrat/Montserrat-Regular.ttf
-        - asset: lib/assets/fonts/Montserrat/Montserrat-Bold.ttf
-          weight: 700
-        - asset: lib/assets/fonts/Montserrat/Montserrat-SemiBold.ttf
-          weight: 600
-        - asset: lib/assets/fonts/Montserrat/Montserrat-Medium.ttf
-          weight: 500
